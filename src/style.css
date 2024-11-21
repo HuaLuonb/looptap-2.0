@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+  
+  .game-container {
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .developer-panel {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+  
+  .developer-panel div {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .game-main svg {
+    width: 100%;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 8px;
+  }
+  
+  input, button {
+    padding: 8px;
+    margin: 5px;
+  }
