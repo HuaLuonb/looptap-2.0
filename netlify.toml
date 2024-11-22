@@ -4,3 +4,9 @@
 
 [build.environment]
   PYTHON_VERSION = "3.8.20"
+  NODE_VERSION = "18.20.5"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
