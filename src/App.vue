@@ -48,6 +48,8 @@
       <div class="game-main">
         <svg 
           ref="gameSvg" 
+          width="500" 
+          height="500"
           @mousedown="tap" 
           @touchstart.prevent="tap"
         >
@@ -77,13 +79,13 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 
 // 状态管理
 const developerCode = ref('')
 const developerMode = ref(false)
 const score = ref(0)
-const bestScore = ref(Number(localStorage.getItem('bestScore') || 0))
+const bestScore = ref(0)
 const gameState = ref('init')
 const ballPosition = reactive({ x: 250, y: 250 })
 const arcAngles = ref([0, 180])
@@ -100,6 +102,19 @@ const gameSettings = reactive({
 })
 
 const customSettings = reactive({...gameSettings})
+
+// 生命周期钩子
+onMounted(() => {
+  const storedBestScore = localStorage.getItem('bestScore')
+  if (storedBestScore) {
+    bestScore.value = Number(storedBestScore)
+  }
+  
+  const storedSettings = localStorage.getItem('gameSettings')
+  if (storedSettings) {
+    Object.assign(gameSettings, JSON.parse(storedSettings))
+  }
+})
 
 // 计算属性
 const arcPath = computed(() => {
@@ -211,3 +226,51 @@ function calculateTapAngle(event) {
   return angle < 0 ? angle + 360 : angle
 }
 </script>
+
+<style scoped>
+.game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.start-screen, .game-screen {
+  text-align: center;
+}
+
+.developer-panel {
+  margin-bottom: 20px;
+}
+
+.game-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+svg {
+  border: 2px solid #333;
+  border-radius: 50%;
+}
+
+.game-info {
+  margin-top: 20px;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input {
+  margin: 5px;
+  padding: 5px;
+}
+</style>
